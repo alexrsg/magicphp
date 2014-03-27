@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MagicPHP</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="http://magicphp.takeandmake.com.br/css/masterpage.css" type="text/css" />
+</head>
+<body style="background-image: url('img/backgound.png')">
+    <header class="navbar navbar-inverse navbar-fixed-top cTop">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">MagicPHP</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <li><a href="getting-started.html">Getting started</a></li>
+                        <li><a href="framework.html">Framework</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>     
+    <div class="cAfterTop">
+        <div class="cHeader bs-header">
+            <div class="container">
+                <h1>Framework</h1>
+                <p>Understanding a bit more about the structure of the framework and its applications.</p>
+            </div>
+        </div>
+
+        <div class="cContents">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="bs-sidebar hidden-print">
+                            <ul class="nav bs-sidenav">
+                                <li><a href="#storage">Storage</a></li>
+                                <li><a href="#routes">Routes</a></li>
+                                <li><a href="#database">Database</a></li>
+                                <li><a href="#session">Session</a></li>
+                                <li><a href="#templates">Templates</a></li>
+                                <li><a href="#cache">Cache</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+                        <div class="cContentsInner">
+                            <!-- Storage -->
+                           <h1 id="storage">Storage</h1>
+                           <p>The MagicPHP uses a singleton class to store information that can be accessed via PHP or directly in the template, the Storage class is very important to make development of a simpler process templates. See how to create a record and query it at any time:</p>
+                           <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+            Storage<span style="color: #333333">::</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;title&quot;</span>, <span style="background-color: #fff0f0">&quot;Example of title&quot;</span>);
+            <span style="color: #008800; font-weight: bold">echo</span> Storage<span style="color: #333333">::</span><span style="color: #0000CC">Get</span>(<span style="background-color: #fff0f0">&quot;title&quot;</span>);<span style="color: #888888">//Example of title</span>
+    <span style="color: #557799">?&gt;</span>
+    </pre>
+                           <br/>
+                        <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+    <span style="color: #007700">&lt;html&gt;</span>
+        <span style="color: #007700">&lt;head&gt;</span>
+            <span style="color: #007700">&lt;title&gt;</span><span style="color: #557799">{</span><span style="color: #996633">$title</span><span style="color: #557799">}</span><span style="color: #007700">&lt;/title&gt;</span>
+        <span style="color: #007700">&lt;/head&gt;</span>
+        <span style="color: #007700">&lt;body&gt;</span>
+
+        <span style="color: #007700">&lt;/body&gt;</span>
+    <span style="color: #007700">&lt;/html&gt;</span>
+    </pre>
+                        <br/>
+                        <p>It is still possible to store lists of a single record, but to recover the insert some information in this list using the <b>SetArray</b> and <b>GetArray</b> and functions will be necessary, the procedure is the same as shown in the example above but with an extra parameter, the key list .</p>
+
+                         <!-- Routes -->
+                         <h1 id="routes">Routes</h1>
+                         <p>The control route is very simple and dynamic, for simple systems such as blogs, websites recommended use of direct routes in code, treating the parameters, to more complex systems that have a wide variety of routes is recommended storage in the database and loading at runtime, even for systems with large amount of access creating cache files of the routes.</p>
+                         <br/>
+                         <p>First let's create simple routes and routes with parameters:</p>
+                         <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+        <span style="color: #888888">//http://meublog.com.br/posts/15123</span>
+        Routes<span style="color: #333333">::</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;posts/{id}&quot;</span>, <span style="background-color: #fff0f0">&quot;GET&quot;</span>, <span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$iID</span>){
+            <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;ID: &quot;</span><span style="color: #333333">.</span><span style="color: #996633">$iID</span>;<span style="color: #888888">//15123</span>
+        });
+    </pre>
+                        <br/>
+
+                         <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+        <span style="color: #888888">//http://meublog.com.br/2013/05/sistemas-mais-seguros-cookies.html</span>
+        Routes<span style="color: #333333">::</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;{year}/{month}/{seo}&quot;</span>, <span style="background-color: #fff0f0">&quot;GET&quot;</span>, <span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$iYear</span>, <span style="color: #996633">$iMonth</span>, <span style="color: #996633">$sSEO</span>){
+            <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Year: &quot;</span><span style="color: #333333">.</span><span style="color: #996633">$iYear</span>;<span style="color: #888888">//2013</span>
+            <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Month: &quot;</span><span style="color: #333333">.</span><span style="color: #996633">$iMonth</span>;<span style="color: #888888">//05</span>
+            <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;SEO: &quot;</span><span style="color: #333333">.</span><span style="color: #996633">$sSEO</span>;<span style="color: #888888">//sistemas-mais-seguros-cookies.html</span>
+        });
+    </pre>
+                            <br/>
+                            <p>Note that in the first example we use a fixed parameter 'posts' that will be required and a dynamic parameter that is returned in the variable <b>$iID</b>, so when the application occurs in the default function called displays the ID in case, below an example of totally routes dynamics, as in the standard Wordpress.</p>
+
+                            <p>For applications that do not have routes is possible to perform standard actions through <b>SetDynamicRoute</b> function, this function is the one who receives all requests that are not provided, so regardless of application can be done to treat the return, even to a 404 page.</p>
+                           <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+        Routes<span style="color: #333333">::</span><span style="color: #0000CC">SetDynamicRoute</span>(<span style="color: #008800; font-weight: bold">function</span>() {
+            <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Other requests&quot;</span>;
+        });
+    </pre>
+                            <!-- Database -->
+                            <h1 id="database">Database</h1>
+                            <p>The MagicPHP is not a framework focused on developing generic solutions, but in specific modules on demand, but the database is a case of the safety factor, the class DB aims to guide the interaction with PHP to create safer centralize SQL requests to check and debugs futuos slow queries, even using standards recommended by Zend. The use of other frameworks like <a href="http://www.doctrine-project.org/" target="_blank">Doctrine</a> or <a href="https://github.com/illuminate/database" target="_blank">Illuminate</a> are possible to be implemented in the architecture of the system, and depending on the type of application being developed are recommended.</p>
+
+                            <div class="bs-callout bs-callout-danger">
+                                <h4>Attention</h4>
+                                <p>This class is under development so it is not recommended to use the stable version of presentation.</p>
+                            </div>
+                            <p>Currently the DB class only has MySQL support and not all functions are provided for use, so use in developing commercial projects is still not recommended</p>
+                            <pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> <span style="color: #333333">`</span>exemple<span style="color: #333333">`</span> (
+      <span style="color: #333333">`</span>id<span style="color: #333333">`</span> <span style="color: #007020">INT</span> <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+      <span style="color: #333333">`</span>name<span style="color: #333333">`</span> <span style="color: #007020">VARCHAR</span>(<span style="color: #0000DD; font-weight: bold">45</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+      <span style="color: #333333">`</span>email<span style="color: #333333">`</span> <span style="color: #007020">VARCHAR</span>(<span style="color: #0000DD; font-weight: bold">45</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+      <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> (<span style="color: #333333">`</span>id<span style="color: #333333">`</span>)
+    );
+    </pre><br/>
+    <p>In a simple table we conduct research, entering and editing data:</p>
+                          <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+
+    Db<span style="color: #333333">::</span><span style="color: #0000CC">CreateConnection</span>(<span style="background-color: #fff0f0">&quot;test&quot;</span>, <span style="background-color: #fff0f0">&quot;mysql&quot;</span>, <span style="background-color: #fff0f0">&quot;localhost&quot;</span>, <span style="background-color: #fff0f0">&quot;root&quot;</span>, <span style="background-color: #fff0f0">&quot;123456&quot;</span>, <span style="background-color: #fff0f0">&quot;test&quot;</span>);
+    <span style="color: #996633">$bResult</span> <span style="color: #333333">=</span> Db<span style="color: #333333">::</span><span style="color: #0000CC">SetCharset</span>(<span style="background-color: #fff0f0">&quot;test&quot;</span>, <span style="background-color: #fff0f0">&quot;UTF8&quot;</span>);
+
+    <span style="color: #996633">$oDb</span> <span style="color: #333333">=</span> Db<span style="color: #333333">::</span><span style="color: #0000CC">test</span>();
+    <span style="color: #996633">$oDb</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">exemple</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">Select</span>(<span style="background-color: #fff0f0">&quot;id&quot;</span>, <span style="background-color: #fff0f0">&quot;name&quot;</span>, <span style="background-color: #fff0f0">&quot;email&quot;</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Limit</span>(<span style="color: #0000DD; font-weight: bold">10</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Execute</span>(<span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$aData</span>, <span style="color: #996633">$mError</span>){
+                    <span style="color: #007020">var_dump</span>(<span style="color: #996633">$aData</span>); <span style="color: #888888">//Array [0]</span>
+                    <span style="color: #008800; font-weight: bold">die</span>();
+                 });
+    </pre><br/>
+    <p>Notice in the above example we perform the connection and gave the namespace 'test', so you can use multiple databases without the confusion connections, held the second amendment of the charset to 'UTF8', so the data will be stored in the same encoding PHP (in the case of codification topic PHP files are UTF-8). After connection has been created it is called as a static function, this call returns an object, then the next step is to make the call of the table, the table object itself has functions to query, insert and update data. Each function returns the object and can perform various functions to call at once.</p>
+                           <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+
+    <span style="color: #996633">$oDb</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">exemple</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">Select</span>(<span style="background-color: #fff0f0">&quot;id&quot;</span>, <span style="background-color: #fff0f0">&quot;name&quot;</span>, <span style="background-color: #fff0f0">&quot;email&quot;</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Filter</span>(<span style="background-color: #fff0f0">&quot;name&quot;</span>, <span style="background-color: #fff0f0">&quot;%an%&quot;</span>, <span style="background-color: #fff0f0">&quot;LIKE&quot;</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Order</span>(<span style="background-color: #fff0f0">&quot;name&quot;</span>, <span style="background-color: #fff0f0">&quot;DESC&quot;</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Limit</span>(<span style="color: #0000DD; font-weight: bold">10</span>)
+                 <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Execute</span>(<span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$aData</span>, <span style="color: #996633">$mError</span>){
+                    Output<span style="color: #333333">::</span><span style="color: #0000CC">ReplaceList</span>(<span style="background-color: #fff0f0">&quot;exemple&quot;</span>, <span style="color: #996633">$aData</span>);
+                 });   
+    </pre><br/>
+    <p>The query function also has functions to filter, order, grouping and record limit.</p><br/>
+                            <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+
+    <span style="color: #996633">$oDb</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">exemple</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">Insert</span>(<span style="color: #008800; font-weight: bold">array</span>(<span style="background-color: #fff0f0">&quot;name&quot;</span> <span style="color: #333333">=&gt;</span> <span style="background-color: #fff0f0">&quot;André Ferreira&quot;</span>, <span style="background-color: #fff0f0">&quot;email&quot;</span> <span style="color: #333333">=&gt;</span> <span style="background-color: #fff0f0">&quot;andrehrf@gmail.com&quot;</span>), <span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$mResult</span>, <span style="color: #996633">$sError</span>){
+       <span style="color: #008800; font-weight: bold">if</span>(<span style="color: #333333">!</span><span style="color: #996633">$mResult</span>)
+          <span style="color: #008800; font-weight: bold">echo</span> <span style="color: #996633">$sError</span>;
+    });
+    </pre><br/>
+    <p>The process of updating and removing registry is similar to the example above, there will always be a callback function that returns the result and error (if it occurs). The proposal is the class of the database is to facilitate maximum interaction with the PHP and still create a more secure interface for less experienced programmers.</p>
+
+                            <!-- Session -->
+                            <h1 id="session">Session</h1>
+                            <p>The class session prioritizes fixing small bugs as frequent definition of directory for storing session files, also allows multiple systems using the same hosting with destintas sessions error that occurs when multiple applications with the same skeleton project are developed.</p>
+                            <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+
+    Session<span style="color: #333333">::</span><span style="color: #0000CC">Start</span>(<span style="background-color: #fff0f0">&quot;session.exemple&quot;</span>, <span style="background-color: #fff0f0">&quot;/cache/sessions&quot;</span>);
+    Session<span style="color: #333333">::</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;test&quot;</span>, <span style="background-color: #fff0f0">&quot;123&quot;</span>);
+    <span style="color: #008800; font-weight: bold">echo</span> Session<span style="color: #333333">::</span><span style="color: #0000CC">Get</span>(<span style="background-color: #fff0f0">&quot;test&quot;</span>);<span style="color: #888888">//123</span>
+    </pre><br/>
+                            <p>Difference between Session and Storage class is that everything is stored in the session will be kept in cache not being lost in future requests, already Storage class loses its contents at the end of the request. Still session class is responsible for a simple login control, it is clear that the process to be recorded in an authentication session will depend on the system, most systems use auth per database, per OAuth others, others for LDAP, thus verifying the user's identity is up to the developer.</p>
+                            <br/><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+
+    Session<span style="color: #333333">::</span><span style="color: #0000CC">Start</span>(<span style="background-color: #fff0f0">&quot;session.exemple&quot;</span>, <span style="background-color: #fff0f0">&quot;/cache/sessions&quot;</span>);
+    Session<span style="color: #333333">::</span><span style="color: #0000CC">Login</span>(<span style="color: #0000DD; font-weight: bold">1</span>, <span style="background-color: #fff0f0">&quot;André Ferreira&quot;</span>, <span style="background-color: #fff0f0">&quot;andre&quot;</span>, <span style="color: #0000DD; font-weight: bold">3600</span>, <span style="color: #008800; font-weight: bold">true</span>);
+
+    <span style="color: #008800; font-weight: bold">if</span>(Session<span style="color: #333333">::</span><span style="color: #0000CC">CheckAuthentication</span>())
+       <span style="color: #008800; font-weight: bold">echo</span> <span style="background-color: #fff0f0">&quot;Authenticated user&quot;</span>;
+    <span style="color: #008800; font-weight: bold">else</span>
+       header(<span style="background-color: #fff0f0">&quot;Location: login&quot;</span>);
+    </pre>
+
+                            <!-- Templates -->
+                            <h1 id="templates">Templates</h1>
+                            <p>The modeling templates is like Smarty but a little simpler, the important use of templates is precisely the organization of the code because the layers are well divided, it is not necessary to introduce lines of PHP HTML directly into the code so is entirely separate , and much simpler to perform maintenance.</p>
+                            <br/>
+
+                            <!-- Cache -->
+                            <h1 id="cache">Cache</h1>
+                            <br/>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        ! function ($) {
+            $(function () {
+                var $window = $(window)
+                var $body = $(document.body)
+                var $sideBar = $('.bs-sidebar')
+                var navHeight = $('.navbar').outerHeight(true) + 10
+
+                $body.scrollspy({
+                    target: '.bs-sidebar',
+                    offset: navHeight
+                })
+
+                $('.bs-docs-container [href=#]').click(function (e) {
+                    e.preventDefault()
+                })
+
+                $window.on('resize', function () {
+                    $body.scrollspy('refresh')
+                    // We were resized. Check the position of the nav box
+                    $sideBar.affix('checkPosition')
+                })
+
+                $window.on('load', function () {
+                    $body.scrollspy('refresh')
+                    $('.bs-top').affix();
+                    $sideBar.affix({
+                        offset: {
+                            top: function () {
+                                var offsetTop = $sideBar.offset().top
+                                var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
+                                var navOuterHeight = $('.bs-docs-nav').height()
+
+                                // We can cache the height of the header (hence the this.top=)
+                                // This function will never be called again.
+                                return (this.top = offsetTop - navOuterHeight - sideBarMargin);
+                            },
+                            bottom: function () {
+                                // We can't cache the height of the footer, since it could change
+                                // when the window is resized. This function will be called every
+                                // time the window is scrolled or resized
+                                return $('.bs-footer').outerHeight(true)
+                            }
+                        }
+                    })
+                    setTimeout(function () {
+                        // Check the position of the nav box ASAP
+                        $sideBar.affix('checkPosition')
+                    }, 10);
+                    setTimeout(function () {
+                        // Check it again after a while (required for IE)
+                        $sideBar.affix('checkPosition')
+                    }, 100);
+                });
+
+                // tooltip demo
+                $('.tooltip-demo').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+
+                $('.tooltip-test').tooltip()
+                $('.popover-test').popover()
+
+                $('.bs-docs-navbar').tooltip({
+                    selector: "a[data-toggle=tooltip]",
+                    container: ".bs-docs-navbar .nav"
+                })
+            })
+        }(window.jQuery);
+    </script>
+</body>
+</html>

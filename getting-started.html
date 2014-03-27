@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MagicPHP</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="http://magicphp.takeandmake.com.br/css/masterpage.css" type="text/css" />
+</head>
+<body style="background-image: url('img/backgound.png')">
+    <header class="navbar navbar-inverse navbar-fixed-top cTop">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand">MagicPHP</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <li><a href="getting-started.html">Getting started</a></li>
+                        <li><a href="framework.html">Framework</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header> 
+        <div class="cAfterTop">
+            <div class="cHeader bs-header">
+                <div class="container">
+                    <h1>Getting started</h1>
+                    <p>A quick introduction to the MagicPHP, download, basic usage and installation of modules.</p>
+                </div>
+            </div>
+
+            <div class="cContents">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="bs-sidebar hidden-print">
+                                <ul class="nav bs-sidenav">
+                                    <li><a href="#keepitsimple">Keep it simple!</a></li>
+                                    <li><a href="#ondemand">On demand</a></li>
+                                    <li><a href="#helloworld">Hello World</a></li>
+                                    <li><a href="#modules">Modules</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="cContentsInner">
+                                <!-- Keep it simple! -->
+                               <h1 id="keepitsimple">Keep it simple!</h1>
+                               <p>The idea is to be simple! There are many PHP frameworks on the internet with generic solutions and dozens of options to perform simple tasks, using complex models and documentation tiresome.
+
+               The MagicPHP has a different proposal, start your application with the minimum possible and use demand modules, has complete freedom to use any feature already available in a simple way.</p>
+
+                               <!-- On Demand -->
+                               <h1 id="ondemand">On Demand</h1>
+                               <p>The concept of demand loading is already being used in languages ​​like Ruby and Node.js, now is the turn of PHP!, With the repository Magic is possible to develop smaller modules to solve simple problems and share with the community.</p>
+
+                               <!-- Hello World -->
+                               <h1 id="helloworld">Hello World</h1>
+                               <p>See how simple it is to create your system in a few simple steps:</p>
+                               <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+            <span style="color: #DD4422">/**</span>
+        <span style="color: #DD4422">     * Hello World</span>
+        <span style="color: #DD4422">     * </span>
+        <span style="color: #DD4422">     * @package     MagicPHP</span>
+        <span style="color: #DD4422">     * @author      André Henrique da Rocha Ferreira &lt;andrehrf@gmail.com&gt;</span>
+        <span style="color: #DD4422">     * @link        https://github.com/andrehrf/magicphp MagicPHP(tm)</span>
+        <span style="color: #DD4422">     * @license     MIT License (http://www.opensource.org/licenses/mit-license.php)</span>
+        <span style="color: #DD4422">     */</span>
+
+            Routes<span style="color: #333333">::</span><span style="color: #0000CC">SetDynamicRoute</span>(<span style="color: #008800; font-weight: bold">function</span>(<span style="color: #996633">$sUri</span>, <span style="color: #996633">$sMethod</span>) {
+                Output<span style="color: #333333">::</span><span style="color: #0000CC">SetNamespace</span>(<span style="background-color: #fff0f0">&quot;hello world&quot;</span>);
+                Output<span style="color: #333333">::</span><span style="color: #0000CC">SetTemplate</span>(Storage<span style="color: #333333">::</span><span style="color: #0000CC">Join</span>(<span style="background-color: #fff0f0">&quot;dir.shell.default.tpl&quot;</span>, <span style="background-color: #fff0f0">&quot;index.tpl&quot;</span>));
+                Output<span style="color: #333333">::</span><span style="color: #0000CC">AppendCSS</span>(Storage<span style="color: #333333">::</span><span style="color: #0000CC">Join</span>(<span style="background-color: #fff0f0">&quot;dir.shell.default.css&quot;</span>, <span style="background-color: #fff0f0">&quot;index.css&quot;</span>));
+                Output<span style="color: #333333">::</span><span style="color: #0000CC">Send</span>();
+            });
+        </pre>
+              <br/>                 <p>Now look at the template code:</p>
+                             <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+        <span style="color: #007700">&lt;html&gt;</span>
+            <span style="color: #007700">&lt;head&gt;</span>
+                <span style="color: #007700">&lt;title&gt;</span>Hello World<span style="color: #007700">&lt;/title&gt;</span>
+                <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">charset=</span><span style="background-color: #fff0f0">&quot;</span><span style="color: #557799">{</span><span style="color: #333333">&amp;</span><span style="color: #0000CC">app</span><span style="color: #333333">.</span><span style="color: #0000CC">charset</span><span style="color: #557799">}</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;viewport&quot;</span> <span style="color: #0000CC">content=</span><span style="background-color: #fff0f0">&quot;width=device-width, initial-scale=1.0&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #557799">{</span><span style="color: #0066BB; font-weight: bold">if</span> <span style="background-color: #fff0f0">&quot;{&amp;cache.css}&quot;</span> <span style="color: #333333">!=</span> <span style="background-color: #fff0f0">&quot;false&quot;</span><span style="color: #557799">}</span>
+                <span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;stylesheet&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;</span><span style="color: #557799">{</span><span style="color: #333333">&amp;</span><span style="color: #0000CC">cache</span><span style="color: #333333">.</span><span style="color: #0000CC">css</span><span style="color: #557799">}</span><span style="background-color: #fff0f0">&quot;</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text/css&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #557799">{</span><span style="color: #0066BB; font-weight: bold">endif</span><span style="color: #557799">}</span>
+            <span style="color: #007700">&lt;/head&gt;</span>
+            <span style="color: #007700">&lt;body&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;helloworld&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;img</span> <span style="color: #0000CC">alt=</span><span style="background-color: #fff0f0">&quot;MagicPHP&quot;</span> <span style="color: #0000CC">title=</span><span style="background-color: #fff0f0">&quot;MagicPHP&quot;</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;</span><span style="color: #557799">{</span><span style="color: #333333">&amp;</span><span style="color: #0000CC">route</span><span style="color: #333333">.</span><span style="color: #0000CC">root</span><span style="color: #557799">}</span><span style="background-color: #fff0f0">shell/default/img/magic.png&quot;</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;h1&gt;</span>Hello World<span style="color: #007700">&lt;/h1&gt;&lt;br/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>        
+            <span style="color: #007700">&lt;/body&gt;</span>
+        <span style="color: #007700">&lt;/html&gt;</span>
+        </pre>
+                    <br/> <p>And the CSS:</p>
+                          <pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">@import</span> <span style="color: #007700">url</span><span style="color: #333333">(</span><span style="color: #007700">http</span><span style="color: #333333">://</span><span style="color: #007700">fonts</span><span style="color: #BB0066; font-weight: bold">.googleapis.com</span><span style="color: #333333">/</span><span style="color: #007700">css</span><span style="color: #333333">?</span><span style="color: #007700">family</span><span style="color: #333333">=</span><span style="color: #007700">Cantora</span><span style="color: #333333">+</span><span style="color: #007700">One</span><span style="color: #333333">)</span>;
+
+        <span style="color: #007700">body</span>{
+            <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#EFEFEF</span>;
+            <span style="color: #008800; font-weight: bold">font-family</span><span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Cantora One&#39;</span><span style="color: #333333">,</span> <span style="color: #008800; font-weight: bold">sans-serif</span>;
+        }
+
+        <span style="color: #BB0066; font-weight: bold">.helloworld</span>{
+            <span style="color: #008800; font-weight: bold">position</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">fixed</span>;
+            <span style="color: #008800; font-weight: bold">left</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
+            <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">500px</span>;
+            <span style="color: #008800; font-weight: bold">margin-left</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">-250px</span>;
+            <span style="color: #008800; font-weight: bold">height</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">130px</span>;
+            <span style="color: #008800; font-weight: bold">top</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">50px</span>;
+            <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#FFF</span>; 
+            <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">1px</span> <span style="color: #008800; font-weight: bold">solid</span> <span style="color: #6600EE; font-weight: bold">#CCC</span>;
+            <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">20px</span>;
+            <span style="color: #008800; font-weight: bold">line-height</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">80px</span>;
+            <span style="color: #333333">-</span>webkit<span style="color: #333333">-</span><span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">5px</span>;
+            <span style="color: #333333">-</span>moz<span style="color: #333333">-</span><span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">5px</span>;
+            <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">5px</span>;
+        }
+
+        <span style="color: #BB0066; font-weight: bold">.helloworld</span><span style="color: #555555; font-weight: bold">:hover</span>{
+            <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#FAFAFA</span>;
+        }
+
+        <span style="color: #BB0066; font-weight: bold">.helloworld</span> <span style="color: #007700">img</span><span style="color: #333333">,</span> <span style="color: #BB0066; font-weight: bold">.helloworld</span> <span style="color: #007700">h1</span>{
+            <span style="color: #008800; font-weight: bold">float</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">left</span>;
+        }
+
+        <span style="color: #BB0066; font-weight: bold">.helloworld</span> <span style="color: #007700">img</span>{
+            <span style="color: #008800; font-weight: bold">margin-right</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">80px</span>;
+        }
+        </pre>
+                            <!-- Modules -->
+                            <h1 id="modules">Modules</h1>
+                            <p>The structure of the modules is simple, everyone should be located in the <b>/modules</b> directory, the files needed for the operation are <b>include.php</b> and <b>status.txt</b>. File <b>include.php</b> will be responsible for adding information to the system module directory as __autoload is still the file that contains the module information such as author, license, website, among others. The <b>status.txt</b> file only exists to control the module activity, so as not to require control by the database, its content is 1 or 0 and 1 for when the module is active in the system, so you can keep the files modules and only use them when necessary.</p>
+
+                            <p>Below an example of the include.php file:</p>
+                            <pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;?php</span>
+            <span style="color: #DD4422">/**</span>
+        <span style="color: #DD4422">     * Initializer module</span>
+        <span style="color: #DD4422">     * </span>
+        <span style="color: #DD4422">     * @package     MagicPHP Development</span>
+        <span style="color: #DD4422">     * @author      André Henrique da Rocha Ferreira &lt;andrehrf@gmail.com&gt;</span>
+        <span style="color: #DD4422">     * @link        https://github.com/andrehrf/magicphp-development MagicPHP Development(tm)</span>
+        <span style="color: #DD4422">     * @license     MIT License (http://www.opensource.org/licenses/mit-license.php) </span>
+        <span style="color: #DD4422">     */</span>
+
+            <span style="color: #996633">$oModule</span> <span style="color: #333333">=</span> Modules<span style="color: #333333">::</span><span style="color: #0000CC">Append</span>(<span style="background-color: #fff0f0">&quot;development&quot;</span>, __DIR__ <span style="color: #333333">.</span> SP);
+            <span style="color: #996633">$oModule</span><span style="color: #333333">-&gt;</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;name&quot;</span>, <span style="background-color: #fff0f0">&quot;MagicPHP Development&quot;</span>)
+                    <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;author&quot;</span>, <span style="background-color: #fff0f0">&quot;André Ferreira &lt;andrehrf@gmail.com&gt;&quot;</span>)
+                    <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;website&quot;</span>, <span style="background-color: #fff0f0">&quot;https://github.com/andrehrf/magicphp-development&quot;</span>)
+                    <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Set</span>(<span style="background-color: #fff0f0">&quot;licence&quot;</span>, <span style="background-color: #fff0f0">&quot;MIT License&quot;</span>)
+                    <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Dependence</span>(<span style="background-color: #fff0f0">&quot;magicphp&quot;</span>, <span style="background-color: #fff0f0">&quot;0.1&quot;</span>)
+                    <span style="color: #333333">-&gt;</span><span style="color: #0000CC">Start</span>();
+        </pre>
+                            <br/><p>More information about the modules <a href="{$route.root}docs/modules">click here</a> to see the complete information about modules.</p>
+        <br/><br/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        ! function ($) {
+            $(function () {
+                var $window = $(window)
+                var $body = $(document.body)
+                var $sideBar = $('.bs-sidebar')
+                var navHeight = $('.navbar').outerHeight(true) + 10
+
+                $body.scrollspy({
+                    target: '.bs-sidebar',
+                    offset: navHeight
+                })
+
+                $('.bs-docs-container [href=#]').click(function (e) {
+                    e.preventDefault()
+                })
+
+                $window.on('resize', function () {
+                    $body.scrollspy('refresh')
+                    // We were resized. Check the position of the nav box
+                    $sideBar.affix('checkPosition')
+                })
+
+                $window.on('load', function () {
+                    $body.scrollspy('refresh')
+                    $('.bs-top').affix();
+                    $sideBar.affix({
+                        offset: {
+                            top: function () {
+                                var offsetTop = $sideBar.offset().top
+                                var sideBarMargin = parseInt($sideBar.children(0).css('margin-top'), 10)
+                                var navOuterHeight = $('.bs-docs-nav').height()
+
+                                // We can cache the height of the header (hence the this.top=)
+                                // This function will never be called again.
+                                return (this.top = offsetTop - navOuterHeight - sideBarMargin);
+                            },
+                            bottom: function () {
+                                // We can't cache the height of the footer, since it could change
+                                // when the window is resized. This function will be called every
+                                // time the window is scrolled or resized
+                                return $('.bs-footer').outerHeight(true)
+                            }
+                        }
+                    })
+                    setTimeout(function () {
+                        // Check the position of the nav box ASAP
+                        $sideBar.affix('checkPosition')
+                    }, 10);
+                    setTimeout(function () {
+                        // Check it again after a while (required for IE)
+                        $sideBar.affix('checkPosition')
+                    }, 100);
+                });
+
+                // tooltip demo
+                $('.tooltip-demo').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: "body"
+                })
+
+                $('.tooltip-test').tooltip()
+                $('.popover-test').popover()
+
+                $('.bs-docs-navbar').tooltip({
+                    selector: "a[data-toggle=tooltip]",
+                    container: ".bs-docs-navbar .nav"
+                })
+            })
+        }(window.jQuery);
+    </script>
+</body>
+</html>
